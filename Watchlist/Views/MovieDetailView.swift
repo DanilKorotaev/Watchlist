@@ -1,11 +1,14 @@
 import SwiftUI
 
 struct MovieDetailView: View {
-    let store: WatchlistStore
-    let movieID: UUID
+    @State private var viewModel: MovieDetailViewModel
+
+    init(store: WatchlistStore, movieID: UUID) {
+        _viewModel = State(initialValue: MovieDetailViewModel(store: store, movieID: movieID))
+    }
 
     private var movie: Movie? {
-        store.movie(id: movieID)
+        viewModel.movie
     }
 
     var body: some View {
@@ -77,7 +80,7 @@ struct MovieDetailView: View {
     private var watchedButton: some View {
         if let movie {
             Button {
-                store.toggleWatched(id: movieID)
+                viewModel.watchedButtonTapped()
             } label: {
                 Label(
                     movie.isWatched ? "Вернуть в очередь" : "Отметить просмотренным",
@@ -93,7 +96,7 @@ struct MovieDetailView: View {
     private var favoriteButton: some View {
         if let movie {
             Button {
-                store.toggleFavorite(id: movieID)
+                viewModel.favoriteButtonTapped()
             } label: {
                 Label(
                     movie.isFavorite ? "Убрать из избранного" : "В избранное",
@@ -107,7 +110,7 @@ struct MovieDetailView: View {
 
     private var deleteButton: some View {
         Button(role: .destructive) {
-            store.remove(id: movieID)
+            viewModel.deleteButtonTapped()
         } label: {
             Label("Удалить из списка", systemImage: "trash")
                 .frame(maxWidth: .infinity)
