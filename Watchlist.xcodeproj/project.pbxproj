@@ -12,6 +12,7 @@
 		2B0C7682A200F8493DADA75E /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB02F0256EC653D667E98358 /* MovieDetailView.swift */; };
 		2B180EE35F7EF03782570D97 /* WatchlistStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC66589B50801215AA25CED1 /* WatchlistStore.swift */; };
 		4A76091B0F479C1600FF3043 /* WatchlistApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCCDFF5A2DAB26ABCA4984F /* WatchlistApp.swift */; };
+		636D0BFAAD4AC4C2F711EF2D /* DatePickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E7615272CA978F01803F1F /* DatePickerSheet.swift */; };
 		9A59B5AC0171523811F1A693 /* MovieRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6487D98DEA71637AD2BBBF74 /* MovieRowView.swift */; };
 		9C76BEE47DD7B9B78A804A4E /* MovieListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD489E7AFB026834B9EADDD /* MovieListView.swift */; };
 		A298E9C7CCEFBABD92F10036 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C63EA8BC8B431D9A0F73FCBD /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04E7615272CA978F01803F1F /* DatePickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerSheet.swift; sourceTree = "<group>"; };
 		4FD489E7AFB026834B9EADDD /* MovieListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListView.swift; sourceTree = "<group>"; };
 		57F5D2630770BEA89EAF734D /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
 		6487D98DEA71637AD2BBBF74 /* MovieRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRowView.swift; sourceTree = "<group>"; };
@@ -42,6 +44,7 @@
 			isa = PBXGroup;
 			children = (
 				ACF15EA5FBE5BE7DC2137137 /* AddMovieView.swift */,
+				04E7615272CA978F01803F1F /* DatePickerSheet.swift */,
 				BB02F0256EC653D667E98358 /* MovieDetailView.swift */,
 				4FD489E7AFB026834B9EADDD /* MovieListView.swift */,
 				6487D98DEA71637AD2BBBF74 /* MovieRowView.swift */,
@@ -165,6 +168,7 @@
 				EE96BB5FA5E211282243FE8E /* AddMovieView.swift in Sources */,
 				1B0FB93CFAE79B67FABA3E28 /* AddMovieViewModel.swift in Sources */,
 				F50425C5A93E0673FBAE1211 /* ContentView.swift in Sources */,
+				636D0BFAAD4AC4C2F711EF2D /* DatePickerSheet.swift in Sources */,
 				C862C39E68FAA1EAF2006E0F /* Movie.swift in Sources */,
 				2B0C7682A200F8493DADA75E /* MovieDetailView.swift in Sources */,
 				F26836C5CA1A1A466B7DD35C /* MovieDetailViewModel.swift in Sources */,

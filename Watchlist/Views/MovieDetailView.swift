@@ -3,6 +3,8 @@ import SwiftUI
 struct MovieDetailView: View {
     @State private var viewModel: MovieDetailViewModel
 
+    private static let dateFormat: Date.FormatStyle = .dateTime.day().month().year()
+
     init(store: WatchlistStore, movieID: UUID) {
         _viewModel = State(initialValue: MovieDetailViewModel(store: store, movieID: movieID))
     }
@@ -14,20 +16,41 @@ struct MovieDetailView: View {
     var body: some View {
         Group {
             if movie != nil {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 20) {
-                        header
-                        statusCard
-                        actions
+                loadedContent
+                    .sheet(isPresented: Bindable(viewModel).isPickingDate) {
+                        planDateSheet
                     }
-                    .padding()
-                }
             } else {
                 deletedPlaceholder
             }
         }
         .navigationTitle("Детали")
         .navigationBarTitleDisplayMode(.inline)
+    }
+
+    private var loadedContent: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                header
+                statusCard
+                planSection
+                actions
+            }
+            .padding()
+        }
+    }
+
+    private var planDateSheet: some View {
+        DatePickerSheet(
+            title: "Когда смотрим?",
+            initialDate: movie?.plannedDate ?? .now,
+            onSelect: { date in
+                viewModel.dateSelected(date)
+            },
+            onClear: {
+                viewModel.dateCleared()
+            }
+        )
     }
 
     @ViewBuilder
@@ -65,6 +88,43 @@ struct MovieDetailView: View {
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12))
+        }
+    }
+
+    @ViewBuilder
+    private var planSection: some View {
+        if let movie {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("План")
+                    .font(.headline)
+                if let plannedDate = movie.plannedDate {
+                    Text("Смотрим \(plannedDate.formatted(Self.dateFormat))")
+                        .foregroundStyle(.secondary)
+                } else {
+                    Text("Дата ещё не выбрана")
+                        .foregroundStyle(.secondary)
+                }
+                planDateButton
+            }
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12))
+        }
+    }
+
+    @ViewBuilder
+    private var planDateButton: some View {
+        if let movie {
+            Button {
+                viewModel.planDateButtonTapped()
+            } label: {
+                Label(
+                    movie.plannedDate == nil ? "Выбрать дату" : "Изменить дату",
+                    systemImage: "calendar"
+                )
+                .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.bordered)
         }
     }
 

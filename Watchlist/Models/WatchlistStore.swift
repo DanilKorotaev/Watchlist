@@ -31,6 +31,11 @@ final class WatchlistStore {
         movies[index].isWatched.toggle()
     }
 
+    func setPlannedDate(id: UUID, date: Date?) {
+        guard let index = movies.firstIndex(where: { $0.id == id }) else { return }
+        movies[index].plannedDate = date
+    }
+
     func remove(id: UUID) {
         movies.removeAll { $0.id == id }
     }
