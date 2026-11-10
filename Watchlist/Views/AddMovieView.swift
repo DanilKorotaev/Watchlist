@@ -1,14 +1,11 @@
 import SwiftUI
 
 struct AddMovieView: View {
-    let store: WatchlistStore
-    @State private var title = ""
-    @State private var genre: MovieGenre = .drama
-    @State private var markAsFavorite = false
+    @State private var viewModel: AddMovieViewModel
     @Environment(\.dismiss) private var dismiss
 
-    private var canSave: Bool {
-        !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    init(store: WatchlistStore) {
+        _viewModel = State(initialValue: AddMovieViewModel(store: store))
     }
 
     var body: some View {
@@ -28,13 +25,13 @@ struct AddMovieView: View {
 
     private var movieSection: some View {
         Section("Фильм") {
-            TextField("Название", text: $title)
-            Picker("Жанр", selection: $genre) {
+            TextField("Название", text: Bindable(viewModel).title)
+            Picker("Жанр", selection: Bindable(viewModel).genre) {
                 ForEach(MovieGenre.allCases) { item in
                     Text(item.label).tag(item)
                 }
             }
-            Toggle("Сразу в избранное", isOn: $markAsFavorite)
+            Toggle("Сразу в избранное", isOn: Bindable(viewModel).markAsFavorite)
         }
     }
 
@@ -54,16 +51,9 @@ struct AddMovieView: View {
 
     private var saveButton: some View {
         Button("Сохранить") {
-            let cleaned = title.trimmingCharacters(in: .whitespacesAndNewlines)
-            store.add(
-                Movie(
-                    title: cleaned,
-                    genre: genre,
-                    isFavorite: markAsFavorite
-                )
-            )
+            viewModel.saveButtonTapped()
             dismiss()
         }
-        .disabled(!canSave)
+        .disabled(!viewModel.canSave)
     }
 }

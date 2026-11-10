@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B0FB93CFAE79B67FABA3E28 /* AddMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891B12E648AC00FFC36DDD6B /* AddMovieViewModel.swift */; };
 		20F05568383E1D02ECC0F9A6 /* MovieGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF34B524EAEBB2C05103EA15 /* MovieGenre.swift */; };
 		2B0C7682A200F8493DADA75E /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB02F0256EC653D667E98358 /* MovieDetailView.swift */; };
 		2B180EE35F7EF03782570D97 /* WatchlistStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC66589B50801215AA25CED1 /* WatchlistStore.swift */; };
@@ -26,6 +27,7 @@
 		6487D98DEA71637AD2BBBF74 /* MovieRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRowView.swift; sourceTree = "<group>"; };
 		7C8EEAD47397F33E20B81C8C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7FCCDFF5A2DAB26ABCA4984F /* WatchlistApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistApp.swift; sourceTree = "<group>"; };
+		891B12E648AC00FFC36DDD6B /* AddMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieViewModel.swift; sourceTree = "<group>"; };
 		ACF15EA5FBE5BE7DC2137137 /* AddMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieView.swift; sourceTree = "<group>"; };
 		BB02F0256EC653D667E98358 /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 		BCC2ACC826C0BC2B31D72594 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 		D003776369AC1D05B2D46103 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				891B12E648AC00FFC36DDD6B /* AddMovieViewModel.swift */,
 				57F5D2630770BEA89EAF734D /* MovieDetailViewModel.swift */,
 			);
 			path = ViewModels;
@@ -160,6 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE96BB5FA5E211282243FE8E /* AddMovieView.swift in Sources */,
+				1B0FB93CFAE79B67FABA3E28 /* AddMovieViewModel.swift in Sources */,
 				F50425C5A93E0673FBAE1211 /* ContentView.swift in Sources */,
 				C862C39E68FAA1EAF2006E0F /* Movie.swift in Sources */,
 				2B0C7682A200F8493DADA75E /* MovieDetailView.swift in Sources */,
