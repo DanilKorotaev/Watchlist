@@ -6,11 +6,11 @@ struct MovieListView: View {
     var body: some View {
         List {
             ForEach(store.movies) { movie in
-                MovieRowView(movie: movie)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        store.toggleWatched(id: movie.id)
-                    }
+                NavigationLink {
+                    MovieDetailView(store: store, movieID: movie.id)
+                } label: {
+                    MovieRowView(movie: movie)
+                }
             }
             .onDelete { indexSet in
                 for index in indexSet {
