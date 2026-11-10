@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MovieListView: View {
     let store: WatchlistStore
+    @State private var isAddingMovie = false
 
     var body: some View {
         List {
@@ -19,21 +20,35 @@ struct MovieListView: View {
             }
         }
         .navigationTitle("К просмотру")
-        .overlay {
-            if store.movies.isEmpty {
-                ContentUnavailableView(
-                    "Нет фильмов",
-                    systemImage: "film",
-                    description: Text("Нажмите +, чтобы добавить первый фильм.")
-                )
-            }
+        .overlay { emptyOverlay }
+        .toolbar { addToolbarItem }
+        .sheet(isPresented: $isAddingMovie) {
+            addMovieSheet
         }
-        .toolbar {
+    }
+
+    @ViewBuilder
+    private var emptyOverlay: some View {
+        if store.movies.isEmpty {
+            ContentUnavailableView(
+                "Нет фильмов",
+                systemImage: "film",
+                description: Text("Нажмите +, чтобы добавить первый фильм.")
+            )
+        }
+    }
+
+    private var addToolbarItem: some ToolbarContent {
+        ToolbarItem(placement: .primaryAction) {
             Button {
-                store.add(Movie(title: "Новый фильм", genre: .drama))
+                isAddingMovie = true
             } label: {
                 Image(systemName: "plus")
             }
         }
+    }
+
+    private var addMovieSheet: some View {
+        AddMovieView(store: store)
     }
 }
