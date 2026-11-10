@@ -3,8 +3,8 @@ import SwiftUI
 struct MovieListView: View {
     @State private var viewModel: MovieListViewModel
 
-    init(store: WatchlistStore) {
-        _viewModel = State(initialValue: MovieListViewModel(store: store))
+    init(store: WatchlistStore, filter: MovieListFilter = .all) {
+        _viewModel = State(initialValue: MovieListViewModel(store: store, filter: filter))
     }
 
     var body: some View {
@@ -25,9 +25,9 @@ struct MovieListView: View {
                 viewModel.deleteMovies(at: indexSet)
             }
         }
-        .navigationTitle("К просмотру")
+        .navigationTitle(viewModel.title)
         .overlay { emptyOverlay }
-        .toolbar { addToolbarItem }
+        .toolbar { toolbarContent }
         .sheet(isPresented: Bindable(viewModel).isAddingMovie) {
             addMovieSheet
         }
@@ -37,19 +37,26 @@ struct MovieListView: View {
     private var emptyOverlay: some View {
         if viewModel.movies.isEmpty {
             ContentUnavailableView(
-                "Нет фильмов",
-                systemImage: "film",
-                description: Text("Нажмите +, чтобы добавить первый фильм.")
+                viewModel.filter == .favorites ? "Пока пусто" : "Нет фильмов",
+                systemImage: viewModel.filter == .favorites ? "heart" : "film",
+                description: Text(
+                    viewModel.filter == .favorites
+                        ? "Добавьте фильм в избранное сердцем в списке или на деталях."
+                        : "Нажмите +, чтобы добавить первый фильм."
+                )
             )
         }
     }
 
-    private var addToolbarItem: some ToolbarContent {
-        ToolbarItem(placement: .primaryAction) {
-            Button {
-                viewModel.addButtonTapped()
-            } label: {
-                Image(systemName: "plus")
+    @ToolbarContentBuilder
+    private var toolbarContent: some ToolbarContent {
+        if viewModel.filter == .all {
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    viewModel.addButtonTapped()
+                } label: {
+                    Image(systemName: "plus")
+                }
             }
         }
     }

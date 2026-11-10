@@ -3,14 +3,25 @@ import Foundation
 @Observable
 final class MovieListViewModel {
     let store: WatchlistStore
+    let filter: MovieListFilter
     var isAddingMovie = false
 
-    init(store: WatchlistStore) {
+    init(store: WatchlistStore, filter: MovieListFilter = .all) {
         self.store = store
+        self.filter = filter
     }
 
     var movies: [Movie] {
-        store.movies
+        switch filter {
+        case .all:
+            store.movies
+        case .favorites:
+            store.favorites
+        }
+    }
+
+    var title: String {
+        filter.title
     }
 
     func addButtonTapped() {
