@@ -2,15 +2,17 @@ import SwiftUI
 
 struct MovieRowView: View {
     let movie: Movie
+    var onFavoriteTap: () -> Void
+    var onWatchedTap: () -> Void
 
     private static let dateFormat: Date.FormatStyle = .dateTime.day().month().year()
 
     var body: some View {
-        HStack {
+        HStack(spacing: 12) {
             info
-            Spacer()
-            favoriteIndicator
-            watchedIndicator
+            Spacer(minLength: 8)
+            favoriteButton
+            watchedButton
         }
     }
 
@@ -44,23 +46,30 @@ struct MovieRowView: View {
         }
     }
 
-    @ViewBuilder
-    private var favoriteIndicator: some View {
-        if movie.isFavorite {
-            Image(systemName: "heart.fill")
-                .foregroundStyle(.red)
+    private var favoriteButton: some View {
+        Button(action: onFavoriteTap) {
+            Image(systemName: movie.isFavorite ? "heart.fill" : "heart")
+                .foregroundStyle(movie.isFavorite ? .red : .secondary)
         }
+        .buttonStyle(.borderless)
+        .accessibilityLabel(movie.isFavorite ? "Убрать из избранного" : "В избранное")
     }
 
-    private var watchedIndicator: some View {
-        Image(systemName: movie.isWatched ? "checkmark.circle.fill" : "circle")
-            .foregroundStyle(movie.isWatched ? .green : .secondary)
+    private var watchedButton: some View {
+        Button(action: onWatchedTap) {
+            Image(systemName: movie.isWatched ? "checkmark.circle.fill" : "circle")
+                .foregroundStyle(movie.isWatched ? .green : .secondary)
+        }
+        .buttonStyle(.borderless)
+        .accessibilityLabel(movie.isWatched ? "Вернуть в очередь" : "Отметить просмотренным")
     }
 }
 
 #Preview {
     MovieRowView(
-        movie: Movie(title: "Начало", genre: .sciFi, isFavorite: true, plannedDate: .now)
+        movie: Movie(title: "Начало", genre: .sciFi, isFavorite: true, plannedDate: .now),
+        onFavoriteTap: {},
+        onWatchedTap: {}
     )
     .padding()
 }
